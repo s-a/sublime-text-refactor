@@ -1,2 +1,3 @@
 *.pyc
 tmp.txt.js
+js\node_modules\.bin
