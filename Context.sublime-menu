@@ -4,8 +4,10 @@
 	"caption": "Refactor",
 	"children":
 	[
-	    { "id": "refactor1"},
-	    { "command": "refactor" }
+	    { 
+	    	"id": "refactor-extract-method",
+	    	"caption": "Extract Method",
+	    	"command": "refactor" }
 	]
 }
 ]
