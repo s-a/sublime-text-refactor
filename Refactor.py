@@ -2,7 +2,7 @@ import commands
 import subprocess
 import sublime
 import sublime_plugin
-
+import os
 
 class RefactorCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -44,10 +44,9 @@ class RefactorCommand(sublime_plugin.TextCommand):
             # fixme: fetch error messages
             refactoredText = commands.getoutput('"'+'" "'.join(cmd)+'"')
 
-        print refactoredText
+        os.remove(tempFile)
+        #print refactoredText
         if len(refactoredText) and err == "" > 0:
             for region in self.view.sel():
                 self.view.replace(edit, region, refactoredText.decode('utf-8'))
-            #self.view.replace(edit, sublime.Region(0, self.view.size()), )
-            #self.view.replace(edit, sublime.Region(self.view.sel()), )
             sublime.set_timeout(self.save, 100)
