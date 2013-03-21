@@ -1,0 +1,11 @@
+[
+{
+	"id": "refactor",
+	"caption": "Refactor",
+	"children":
+	[
+	    { "id": "refactor1"},
+	    { "command": "refactor" }
+	]
+}
+]
