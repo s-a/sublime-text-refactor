@@ -7,7 +7,14 @@
 	    { 
 	    	"id": "refactor-extract-method",
 	    	"caption": "Extract Method",
-	    	"command": "refactor" }
+	    	"command": "refactor" 
+    	},
+	    // Selection Menu
+	    { "caption": "Selection: Expand to Paragraph", "command": "expand_selection_to_paragraph" },
+	    { "caption": "Selection: Expand to Scope", "command": "expand_selection", "args": {"to": "scope"} },
+	    { "caption": "Selection: Expand to Brackets", "command": "expand_selection", "args": {"to": "brackets"} },
+	    { "caption": "Selection: Expand to Indentation", "command": "expand_selection", "args": {"to": "indentation"} },
+	    { "caption": "Selection: Expand to Tag", "command": "expand_selection", "args":     {"to": "tag"} }
 	]
 }
 ]

@@ -3,6 +3,7 @@ import subprocess
 import sublime
 import sublime_plugin
 import os
+import json
 
 class RefactorCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -21,6 +22,7 @@ class RefactorCommand(sublime_plugin.TextCommand):
             "brace_style:\ collapse"
         ])
         tempFile = sublime.packages_path() + "/Refactor/tmp.txt.js"
+        jsonResultTempFile = sublime.packages_path() + "/Refactor/resultCodePositions.json"
         #self.view.file_name()
         cmd = ["node", scriptPath, tempFile, settings]
         if len(self.view.sel())!=1:
@@ -44,9 +46,28 @@ class RefactorCommand(sublime_plugin.TextCommand):
             # fixme: fetch error messages
             refactoredText = commands.getoutput('"'+'" "'.join(cmd)+'"')
 
-        #os.remove(tempFile)
-        #print refactoredText
+        
         if len(refactoredText) and err == "" > 0:
+            startPos = 0
             for region in self.view.sel():
+                startPos = region.a
+                if region.b < startPos:
+                    startPos = region.b
                 self.view.replace(edit, region, refactoredText.decode('utf-8'))
+            print startPos
             sublime.set_timeout(self.save, 100)
+            self.view.sel().clear()
+
+            json_file = open(jsonResultTempFile)
+            data = json.load(json_file)
+            json_file.close()
+
+            for region in data:
+                print region[0]
+                print region[1]
+
+                r = sublime.Region(startPos+region[0], startPos+region[1])
+                self.view.sel().add(r)
+
+            os.remove(jsonResultTempFile)
+        os.remove(tempFile)

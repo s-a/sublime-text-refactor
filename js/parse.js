@@ -1,10 +1,12 @@
 var UglifyJS = require("uglify-js");
 var beautify = require('js-beautify').js_beautify;
+var fs = require("fs");
+var path = require("path");
 var util = require("util");
  
 var normalizedCode = null; 
 var extractedFunctionName = "FU";
-var parmsName = "settings";
+var parmsName = "extractedMethodSettings";
 String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
 var isJavascriptKeyword;
 (function() {
@@ -18,7 +20,7 @@ var isJavascriptKeyword;
 		}
 		 
 		return type !== "undefined";
-	}
+	};
 })();
 
 function parse(code, options, debug){
@@ -60,11 +62,10 @@ function parse(code, options, debug){
 
 	parms = JSON.stringify(parmsJSON).replace(/"/g,"").replace("[", "({").replace("]", "})");
 	var cal = extractedFunctionName+parms+";";
-	var fun = "function "+extractedFunctionName+"("+parmsName+"){"+stream+"};";
+	var fun = "function "+extractedFunctionName+"("+parmsName+"){"+stream+"}";
 	exports.fu = fun; // keep extracted function string for mocha testing
 	var result = beautify(fun+"\n\n"+cal, options);
 	if (debug) {
-
 		console.log("-");
 		console.warn("// Original selected Source Code:");
 		console.log(beautify(orignialCode));
@@ -76,9 +77,19 @@ function parse(code, options, debug){
 		console.log(beautify(cal));
 	}
 
-	return result;
-
-	//console.log( result ) ; 
+	var resultCode = UglifyJS.parse( beautify(fun) );
+	resultCode.figure_out_scope();
+	var variablePositions = [];
+	var walker2 = new UglifyJS.TreeWalker(function(node){
+		var varName = node.start.value;
+		if (varName === parmsName){
+			var pos = [node.start.pos,node.start.endpos];
+			variablePositions.push(pos);
+		}
+	});	
+	resultCode.walk(walker2); 
+	fs.writeFileSync(path.join(__dirname, "../resultCodePositions.json"), JSON.stringify(variablePositions));
+	return result; 
 }
 
 if (typeof exports !== "undefined"){
