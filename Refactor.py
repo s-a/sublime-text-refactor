@@ -44,7 +44,7 @@ class RefactorCommand(sublime_plugin.TextCommand):
             # fixme: fetch error messages
             refactoredText = commands.getoutput('"'+'" "'.join(cmd)+'"')
 
-        os.remove(tempFile)
+        #os.remove(tempFile)
         #print refactoredText
         if len(refactoredText) and err == "" > 0:
             for region in self.view.sel():

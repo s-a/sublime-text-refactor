@@ -1,7 +1,7 @@
 var assert = require("assert");
 var parser = require("../parse");
-var code = 'var n = a; x=y; var L = xyz;var xxx = function FAFA(gaga1){var gaga2=0; gaga3=fafa4;} ;status.show	(x);\n// todo: \nconsole.log (xyz, "todo: // tests.", params);this.leaveMeAlone;done();';
-parser.parse(code, null, true); 
+var code = '		var n = a; SKA=y;  var L = xyz;var xxx = function FAFA(VAR1){var VAR2=0; VAR3=fafa4;} ;			status.show	(bar);\n// todo: \nconsole.log (xyz, "todo: ", params);this.leaveMeAlone();done (""); var obj = {type1:String, type2:Number, customtype:number};';
+var parsedCode = parser.parse(code, null, true); 
 
 function hasDuplicates(array) {
     var valuesSoFar = {};
@@ -24,28 +24,31 @@ describe('Parser of Javascript Source Code', function(){
 			assert.notEqual(parser.parms.indexOf("y"),-1);
 			assert.notEqual(parser.parms.indexOf("xyz"),-1);
 			assert.notEqual(parser.parms.indexOf("params"),-1); 
-
 			assert.notEqual(parser.parms.indexOf("status"),-1);
-			assert.notEqual(parser.parms.indexOf("x"),-1);
+			assert.notEqual(parser.parms.indexOf("SKA"),-1);
+			assert.notEqual(parser.parms.indexOf("number"),-1);
 		});
+
 		it('should not contain', function(){ 
 			assert.equal(parser.parms.indexOf("n"),-1);
 			assert.equal(parser.parms.indexOf("FAFA"),-1);
-			assert.equal(parser.parms.indexOf("gaga3"),-1);
+			assert.equal(parser.parms.indexOf("VAR3"),-1);
 			assert.equal(parser.parms.indexOf("this"),-1);
 			assert.equal(parser.parms.indexOf("leaveMeAlone"),-1);
  
 			assert.equal(parser.parms.indexOf("fafa4"),-1);
-			assert.equal(parser.parms.indexOf("gaga2"),-1);
-			assert.equal(parser.parms.indexOf("gaga1"),-1);
+			assert.equal(parser.parms.indexOf("VAR2"),-1);
+			assert.equal(parser.parms.indexOf("VAR1"),-1);
 			assert.equal(parser.parms.indexOf("xxx"),-1);
 
 			assert.equal(parser.parms.indexOf("done"),-1); 
 			assert.equal(parser.parms.indexOf("console"),-1);
+			assert.equal(parser.parms.indexOf("Number"),-1);
+			assert.equal(parser.parms.indexOf("String"),-1);
 		});
 
 		it('should not contain dublicates', function() {
 			assert.equal(hasDuplicates(parser.parms), false, parser.parms);
-		});
+		}); 
 	});
 }); 
