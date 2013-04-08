@@ -4,7 +4,8 @@ Javascript Refactor Sublime2 plugin
 Overview
 ========
 
-This plugin lets you instantly extract selected Javascript code to a new methode.
+It is possible to select Javascript source code and extract it instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
+It als generates a sample function call at the bottom of the new methode.
 
 
 Installation
@@ -21,14 +22,16 @@ or
 Usage
 =====
 
-Select the source code you want to extract into a new method. Use the context menu Refactor / Extract methode. Rename function pparm on the fly.
+Select the source code you want to extract into a new method. Use the context menu Refactor / Extract methode. Rename function parm on the fly.
 
 
-Todo
-====
+Todo for Javascrip files
+========================
 
-- Let the user choose a function name before extraction
-- Let the user choose a custom position to insert extracted methode code
+- Let the user choose a function name before or after extraction
+- Let the user choose a custom position to insert extracted methode code and indent it correctly
+- Rename local scoped variable
+- Goto variable definition
 
 
 License
