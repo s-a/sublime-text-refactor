@@ -25,7 +25,7 @@ Usage
 Select the source code you want to extract into a new method. Use the context menu Refactor / Extract methode. Rename function parm on the fly.
 
 
-Todo for Javascrip files
+Todo for Javascript files
 ========================
 
 - Let the user choose a function name before or after extraction
