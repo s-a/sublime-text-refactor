@@ -26,14 +26,19 @@ Usage
 
 Select the source code you want to extract into a new method. Use the context menu Refactor / Extract methode. Rename function parm on the fly.
 
+Run the tests
+=============
+Goto Pluginfolder into the subfolder js and simply type "mocha". To Add more tests you can save a Javascript File into the subfolder ./js/test.
+You can find an example of current test cases here... https://github.com/s-a/sublime-text-refactor/blob/master/js/test/test1.js
+
 
 Todo for Javascript files
 ========================
-
-- Let the user choose a function name before or after extraction
-- Let the user choose a custom position to insert extracted methode code and indent it correctly
-- Rename local scoped variable
-- Goto variable definition
+- Define exceptions of global scoped variable names like jQuery or $.
+- Let the user choose a function name before or after extraction.
+- Let the user choose a custom position to insert extracted methode code and indent it correctly.
+- Rename local scoped variable.
+- Goto variable definition.
 
 
 License
