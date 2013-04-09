@@ -15,9 +15,7 @@ Use the Sublime Package Control and search for: "refactor" (NOT ACTIVE SO FAR!)
 
 or
 
-1. Clone or download git repo into your packages folder (in ST2, find Browse Packages... menu item to open this folder)
-2. Rename the Plugin Folder from "sublime-text-refactor" to "Refactor" !!!
-
+Clone or download the git repository into your packages folder (in ST2, find Browse Packages... menu item to open this folder)
 
 Dependencies
 ============
