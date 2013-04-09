@@ -11,13 +11,17 @@ It als generates a sample function call at the bottom of the new methode.
 Installation
 ============
 
-Use the Sublime Package Control and search for: "refactor"
+Use the Sublime Package Control and search for: "refactor" (NOT ACTIVE SO FAR!)
 
 or
 
 1. Clone or download git repo into your packages folder (in ST2, find Browse Packages... menu item to open this folder)
-2. Restart ST2 editor (if required)
+2. Rename the Plugin Folder from "sublime-text-refactor" to "Refactor" !!!
 
+
+Dependencies
+============
+- http://nodejs.org
 
 Usage
 =====
