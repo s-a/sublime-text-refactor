@@ -3,7 +3,13 @@ import subprocess
 import sublime
 import sublime_plugin
 import os
+import os.path
 import json
+from os.path import dirname, realpath
+
+
+REFACTOR_PLUGIN_FOLDER = dirname(realpath(__file__)) + "/"
+
 
 class RefactorCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -14,18 +20,18 @@ class RefactorCommand(sublime_plugin.TextCommand):
         self.view.run_command("save")
 
     def RefactorCommand(self, edit):
-        scriptPath = sublime.packages_path() + "/Refactor/js/run.js"
+        scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run.js"
         settings = ' '.join([
             "indent_size:\ 2",
             "indent_char:\ ' '",
             "max_char:\ 80",
             "brace_style:\ collapse"
         ])
-        tempFile = sublime.packages_path() + "/Refactor/tmp.txt.js"
-        jsonResultTempFile = sublime.packages_path() + "/Refactor/resultCodePositions.json"
+        tempFile = REFACTOR_PLUGIN_FOLDER + "tmp.txt.js"
+        jsonResultTempFile = REFACTOR_PLUGIN_FOLDER + "resultCodePositions.json"
         #self.view.file_name()
         cmd = ["node", scriptPath, tempFile, settings]
-        if len(self.view.sel())!=1:
+        if len(self.view.sel()) != 1:
             sublime.error_message("Multiple selection is not supported.")
         out = ""
         err = ""
@@ -46,7 +52,6 @@ class RefactorCommand(sublime_plugin.TextCommand):
             # fixme: fetch error messages
             refactoredText = commands.getoutput('"'+'" "'.join(cmd)+'"')
 
-        
         if len(refactoredText) and err == "" > 0:
             startPos = 0
             for region in self.view.sel():
@@ -54,7 +59,7 @@ class RefactorCommand(sublime_plugin.TextCommand):
                 if region.b < startPos:
                     startPos = region.b
                 self.view.replace(edit, region, refactoredText.decode('utf-8'))
-            print startPos
+            #print startPos
             sublime.set_timeout(self.save, 100)
             self.view.sel().clear()
 
@@ -63,8 +68,8 @@ class RefactorCommand(sublime_plugin.TextCommand):
             json_file.close()
 
             for region in data:
-                print region[0]
-                print region[1]
+                #print region[0]
+                #print region[1]
 
                 r = sublime.Region(startPos+region[0], startPos+region[1])
                 self.view.sel().add(r)
