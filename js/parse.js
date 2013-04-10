@@ -98,7 +98,45 @@ function extractMethod(code, options, debug){
 	return result; 
 }
 
+function findDeclaration (code, codePosition, debug) {
+	var toplevel = UglifyJS.parse(code);
+	toplevel.figure_out_scope();
+	var result = null;
+	var walker = new UglifyJS.TreeWalker(function(node){
+		var varName = node.start.value;
+		if (node.start.pos === codePosition){
+			if (node.thedef && node.thedef.references && node.thedef.references[0]){
+				var n = "$"+varName;
+				var originalPosition = node.scope.variables._values[n].orig[0].start;
+				result = {
+					begin : originalPosition.pos,
+					end : originalPosition.endpos
+				};
+				if (debug){
+					res = util.inspect(result, showHidden=false, depth=1, colorize=true);	
+					console.log("Found " + varName + "'s declaration at ", result);
+				}
+			}
+		}
+	});	
+	toplevel.walk(walker); 
+	//var ref = null;
+	//var res; //debug
+	//	var functions = util.inspect(node.scope.functions, showHidden=false, depth=2, colorize=true);
+	//var variables = util.inspect(currentNode.scope.variables, showHidden=false, depth=2, colorize=true);
+	//var refs = util.inspect(currentNode.scope.variables._values.$callback.orig[0].start.pos, showHidden=false, depth=1, colorize=true);
+	//console.log(refs);
+	//console.log(variables);
+
+	if (result === null){
+		return -1;
+	} else {
+		return result.begin;
+	}
+	
+}
+
 if (typeof exports !== "undefined"){
 	exports.extractMethod = extractMethod; 
+	exports.findDeclaration = findDeclaration;
 }
-	
