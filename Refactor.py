@@ -68,11 +68,11 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
         return startPos
 
 
-class RefactorCommand(RefactorBaseClass):
+class ExtractmethodCommand(RefactorBaseClass):
     def run(self, edit):
-        self.RefactorCommand(edit)
+        self.ExtractmethodCommand(edit)
 
-    def RefactorCommand(self, edit):
+    def ExtractmethodCommand(self, edit):
         if self.abortMultiselection():
             return
 
@@ -100,3 +100,24 @@ class RefactorCommand(RefactorBaseClass):
 
             os.remove(jsonResultTempFile)
         os.remove(tempFile)
+
+
+class GotodefinitionCommand(RefactorBaseClass):
+    def run(self, edit):
+        self.save()
+        self.GotodefinitionCommand(edit)
+
+    def GotodefinitionCommand(self, edit):
+        if self.abortMultiselection():
+            return
+
+        pos = self.view.sel()[0].begin()
+        scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-goto-definition.js"
+        cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
+        codePosition = self.executeNodeJsShell(cmd)
+
+        print codePosition
+
+        #if len(codePosition):
+            #print codePosition
+            #self.view.sel().clear()

@@ -16,5 +16,8 @@ function extractMethod (sourceCodeText, options) {
     return result;
 }
 
-if (typeof exports !== "undefined")
+if (typeof exports !== "undefined"){
     exports.extractMethod = refactor.extractMethod;
+    exports.findDeclaration = refactor.findDeclaration;
+}
+    

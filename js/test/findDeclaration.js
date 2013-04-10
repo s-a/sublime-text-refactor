@@ -25,6 +25,10 @@ describe('Find variables and functions', function(){
 
 			res = parser.findDeclaration(jqueryCode, 208385, true); 
 			assert.equal(res, 1530, "Keyword jQuery");
+			res = parser.findDeclaration(jqueryCode, 213867, true); 
+			assert.equal(res, 1530, "Keyword jQuery");
+
+			
 		}); 
 	});
 });

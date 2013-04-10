@@ -104,7 +104,9 @@ function findDeclaration (code, codePosition, debug) {
 	var result = null;
 	var walker = new UglifyJS.TreeWalker(function(node){
 		var varName = node.start.value;
+		
 		if (node.start.pos === codePosition){
+
 			if (node.thedef && node.thedef.references && node.thedef.references[0]){
 				var n = "$"+varName;
 				var originalPosition = node.scope.variables._values[n].orig[0].start;

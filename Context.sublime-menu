@@ -4,10 +4,13 @@
 	"caption": "Refactor",
 	"children":
 	[
-	    { 
-	    	"id": "refactor-extract-method",
+    	{  
+	    	"caption": "Goto definition",
+	    	"command": "gotodefinition" 
+    	},
+	    {  
 	    	"caption": "Extract Method",
-	    	"command": "refactor" 
+	    	"command": "extractmethod" 
     	},
 	    // Selection Menu
 	    { "caption": "Selection: Expand to Paragraph", "command": "expand_selection_to_paragraph" },
