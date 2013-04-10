@@ -4,8 +4,8 @@ Javascript Refactor Sublime2 plugin
 Overview
 ========
 
-It is possible to select Javascript source code and extract it instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
-It als generates a sample function call at the bottom of the new methode.
+- Extract method
+- Goto definition
 
 
 Installation
@@ -25,12 +25,22 @@ Dependencies
 Usage
 =====
 
-Select the source code you want to extract into a new method. Use the context menu Refactor / Extract methode. Rename function parm on the fly.
+Extract Method:
+Select the source code you want to extract into a new method and choose "Refactor / Extract methode" from context menu. 
+This will extract the source code instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
+It als generates a sample function call at the bottom of the new methode.
+The plugin marks all variables occurring in the source code so you can rename them on the fly. 
+
+Goto Definition:
+Select a keyword via double click and choose "Goto Definition" from context menu. So far this is limited by type of selection! You have to point the cursor direct before the first character of the keyword.
+
 
 Run the tests
 =============
 Goto Pluginfolder into the subfolder js and simply type "mocha". To Add more tests you can save a Javascript File into the subfolder ./js/test.
-You can find an example of current test cases here... https://github.com/s-a/sublime-text-refactor/blob/master/js/test/test1.js
+You can find an examples of current test cases here... 
+https://github.com/s-a/sublime-text-refactor/blob/master/js/test/extractmethode.js
+https://github.com/s-a/sublime-text-refactor/blob/master/js/test/findDeclaration.js
 
 
 Todo for Javascript files
@@ -38,8 +48,8 @@ Todo for Javascript files
 - Define exceptions of global scoped variable names like jQuery or $.
 - Let the user choose a function name before or after extraction.
 - Let the user choose a custom position to insert extracted methode code and indent it correctly.
-- Rename local scoped variable.
-- Goto variable definition.
+- Rename local scoped variable. 
+- Handle unsharpness in variable selection for goto deinition function.
 
 
 License
