@@ -1,7 +1,7 @@
 var assert = require("assert");
 var parser = require("../parse");
 var code = '		var u=undefined;var n = a; SKA=y;  var L = xyz;var xxx = function FAFA(VAR1){var VAR2=0; VAR3=fafa4;} ;			status.show	(bar);\n// todo: \nconsole.log (xyz, "todo: ", params);this.leaveMeAlone();done (""); var obj = {type1:String, type2:Number, customtype:number};';
-var parsedCode = parser.parse(code, null, true); 
+var parsedCode = parser.extractMethod(code, null, true); 
 
 function hasDuplicates(array) {
     var valuesSoFar = {};
