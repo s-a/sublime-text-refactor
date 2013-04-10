@@ -41,7 +41,7 @@
     option = {};
 
   // the refactor functions work when global by dependance
-  global.refactorJs = require(path.join(__dirname, "refactor-js.js")).refactor;
+  global.extractMethod = require(path.join(__dirname, "refactor-js.js")).extractMethod;
 
   // continue only if the source file is specified
   if (source !== "") {
@@ -65,7 +65,7 @@
 
       // refactor the code
       if (source.match(".js" + "$") == ".js") { 
-        log(refactorJs(data, option));
+        log(extractMethod(data, option));
       }
     });
   }

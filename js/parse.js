@@ -13,7 +13,6 @@ var isJavascriptKeyword;
 	isJavascriptKeyword = function testJavascriptKeyword (argument) {
 		var type = "undefined";
 		try {
-			console.log(argument);
 			if (argument === type){
 				return true;
 			} else {
@@ -28,7 +27,7 @@ var isJavascriptKeyword;
 	};
 })();
 
-function parse(code, options, debug){
+function extractMethod(code, options, debug){
 	normalizedCode = beautify(code); 
 	var orignialCode = code; 
 	var parms = [] ; 
@@ -100,6 +99,6 @@ function parse(code, options, debug){
 }
 
 if (typeof exports !== "undefined"){
-	exports.parse = parse; 
+	exports.extractMethod = extractMethod; 
 }
 	
