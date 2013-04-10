@@ -98,6 +98,17 @@ function extractMethod(code, options, debug){
 	return result; 
 }
 
+var i =0;
+function findInScopes(name, currentScope, type){
+	var result = null;
+	var parentScope = currentScope.parent_scope;
+	if (currentScope[type] && currentScope[type]._values[name]) result = currentScope[type]._values[name].orig[0];
+	if (result === null && parentScope ){
+		result = findInScopes(name, parentScope, type);
+	}
+	return result;
+}
+
 function findDeclaration (code, codePosition, debug) {
 	var toplevel = UglifyJS.parse(code);
 	toplevel.figure_out_scope();
@@ -105,18 +116,23 @@ function findDeclaration (code, codePosition, debug) {
 	var walker = new UglifyJS.TreeWalker(function(node){
 		var varName = node.start.value;
 		
-		if (node.start.pos === codePosition){
-
+		if (node.start.pos === codePosition && node.scope){
 			if (node.thedef && node.thedef.references && node.thedef.references[0]){
-				var n = "$"+varName;
-				var originalPosition = node.scope.variables._values[n].orig[0].start;
+				var n = "$"+varName; 
+				var org = findInScopes(n, node.scope, "variables");
+				if (org === null) org = findInScopes(n, node.scope, "functions");
+				//if (node.scope.variables._values[n]) org = .variables._values[n].orig[0];
+				//if (org===null && debug) console.log(node.scope.parent_scope);
+
+				var originalPosition = org.start;
 				result = {
 					begin : originalPosition.pos,
-					end : originalPosition.endpos
+					end : originalPosition.endpos,
+					line : originalPosition.line
 				};
 				if (debug){
-					res = util.inspect(result, showHidden=false, depth=1, colorize=true);	
-					console.log("Found " + varName + "'s declaration at ", result);
+					//var res = util.inspect(result, showHidden=false, depth=1, colorize=true);	
+					console.log("Found " + varName + "'s used(" + codePosition + ") ", result);
 				}
 			}
 		}
@@ -133,7 +149,8 @@ function findDeclaration (code, codePosition, debug) {
 	if (result === null){
 		return -1;
 	} else {
-		return result.begin;
+		if (!debug) result = JSON.stringify(result);
+		return result;
 	}
 	
 }

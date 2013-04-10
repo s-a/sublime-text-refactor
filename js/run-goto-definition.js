@@ -46,7 +46,7 @@
     var codePosition = argv[3];
     if (source.match(".js" + "$") == ".js") { 
       var sourceCode = fs.readFileSync(source, "utf8");
-      var result = findDeclaration(sourceCode, parseInt(codePosition,10) , true);
+      var result = findDeclaration(sourceCode, parseInt(codePosition,10) , false);
       log(result);
     }
  

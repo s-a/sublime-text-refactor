@@ -114,10 +114,10 @@ class GotodefinitionCommand(RefactorBaseClass):
         pos = self.view.sel()[0].begin()
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-goto-definition.js"
         cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
-        codePosition = self.executeNodeJsShell(cmd)
-
-        print codePosition
-
-        #if len(codePosition):
-            #print codePosition
-            #self.view.sel().clear()
+        codePositionString = self.executeNodeJsShell(cmd)
+        codePosition = json.loads(codePositionString, encoding="utf-8")
+        if codePosition != -1:
+            self.view.run_command("goto_line", {"line": codePosition["line"]})
+            r = sublime.Region(codePosition["begin"], codePosition["end"])
+            self.view.sel().clear()
+            self.view.sel().add(r)
