@@ -20,6 +20,7 @@ Clone or download the git repository into your packages folder (in ST2, find Bro
 Dependencies
 ============
 - http://nodejs.org
+- mocha (only for testing)
 
 Usage
 =====
