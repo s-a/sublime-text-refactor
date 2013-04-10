@@ -25,13 +25,15 @@ var isJavascriptKeyword;
 
 function parse(code, options, debug){
 	normalizedCode = beautify(code); 
-
 	var orignialCode = code; 
 	var parms = [] ; 
 	var parmsJSON = [];
 	var toplevel = UglifyJS.parse(normalizedCode);
 	toplevel.figure_out_scope();
-	var stream = UglifyJS.OutputStream();
+	var stream = UglifyJS.OutputStream({
+		comments : true,
+		preserve_line : false
+	});
     
 	var walker = new UglifyJS.TreeWalker(function(node){
 		var varName = node.end.value;
