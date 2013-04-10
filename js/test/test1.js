@@ -1,6 +1,6 @@
 var assert = require("assert");
 var parser = require("../parse");
-var code = '		var n = a; SKA=y;  var L = xyz;var xxx = function FAFA(VAR1){var VAR2=0; VAR3=fafa4;} ;			status.show	(bar);\n// todo: \nconsole.log (xyz, "todo: ", params);this.leaveMeAlone();done (""); var obj = {type1:String, type2:Number, customtype:number};';
+var code = '		var u=undefined;var n = a; SKA=y;  var L = xyz;var xxx = function FAFA(VAR1){var VAR2=0; VAR3=fafa4;} ;			status.show	(bar);\n// todo: \nconsole.log (xyz, "todo: ", params);this.leaveMeAlone();done (""); var obj = {type1:String, type2:Number, customtype:number};';
 var parsedCode = parser.parse(code, null, true); 
 
 function hasDuplicates(array) {
@@ -45,6 +45,7 @@ describe('Parser of Javascript Source Code', function(){
 			assert.equal(parser.parms.indexOf("console"),-1);
 			assert.equal(parser.parms.indexOf("Number"),-1);
 			assert.equal(parser.parms.indexOf("String"),-1);
+			assert.equal(parser.parms.indexOf("undefined"),-1);
 		});
 
 		it('should not contain dublicates', function() {

@@ -7,13 +7,18 @@ var util = require("util");
 var normalizedCode = null; 
 var extractedFunctionName = "FU";
 var parmsName = "extractedMethodSettings";
-String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
+
 var isJavascriptKeyword;
 (function() {
 	isJavascriptKeyword = function testJavascriptKeyword (argument) {
 		var type = "undefined";
 		try {
-			eval("type = typeof " + argument + ";");
+			console.log(argument);
+			if (argument === type){
+				return true;
+			} else {
+				eval("type = typeof " + argument + ";");
+			}
 		} catch (e) {
 		} finally {
 			//console.log(type);
