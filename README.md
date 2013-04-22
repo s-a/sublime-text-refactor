@@ -48,8 +48,7 @@ Todo for Javascript files
 - Define exceptions of global scoped variable names like jQuery or $.
 - Let the user choose a function name before or after extraction.
 - Let the user choose a custom position to insert extracted methode code and indent it correctly.
-- Rename local scoped variable. 
-- Handle unsharpness in variable selection for goto deinition function.
+- Rename local scoped variable.
 
 
 License

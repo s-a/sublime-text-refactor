@@ -116,7 +116,7 @@ function findDeclaration (code, codePosition, debug) {
 	var walker = new UglifyJS.TreeWalker(function(node){
 		var varName = node.start.value;
 		
-		if (node.start.pos === codePosition && node.scope){
+		if (node.start.pos <= codePosition && node.start.endpos >= codePosition && node.scope){
 			if (node.thedef && node.thedef.references && node.thedef.references[0]){
 				var n = "$"+varName; 
 				var org = findInScopes(n, node.scope, "variables");
