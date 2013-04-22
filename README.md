@@ -32,7 +32,7 @@ It als generates a sample function call at the bottom of the new methode.
 The plugin marks all variables occurring in the source code so you can rename them on the fly. 
 
 Goto Definition:
-Select a keyword via double click and choose "Goto Definition" from context menu. So far this is limited by type of selection! You have to point the cursor direct before the first character of the keyword.
+Select a keyword or point the cursor to the keyword and choose "Goto Definition" from context menu.
 
 
 Run the tests
