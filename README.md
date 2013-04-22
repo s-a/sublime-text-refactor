@@ -11,7 +11,7 @@ Overview
 Installation
 ============
 
-Use the Sublime Package Control and search for: "refactor" (NOT ACTIVE SO FAR!)
+Use the Sublime Package Control and search for: "JavaScript Refactor" (NOT ACTIVE SO FAR!)
 
 or
 
