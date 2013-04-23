@@ -9,6 +9,11 @@ Overview
 - Rename variable or function respecting its current scope.
 
 
+Preview
+========
+
+http://www.youtube.com/watch?v=P9K7mxWItPw
+
 Installation
 ============
 
@@ -38,10 +43,9 @@ Select a keyword via double click or point the cursor to the keyword and choose 
 
 Run the tests
 =============
-Goto Pluginfolder into the subfolder js and simply type "mocha". To Add more tests you can save a Javascript File into the subfolder ./js/test.
-You can find an examples of current test cases here... 
-https://github.com/s-a/sublime-text-refactor/blob/master/js/test/extractmethode.js
-https://github.com/s-a/sublime-text-refactor/blob/master/js/test/findDeclaration.js
+Goto Pluginfolder into the subfolder js and simply type "mocha". To Add more tests you can save a Javascript File into the subfolder ./js/test.  
+You can find an examples of current test cases here...  
+https://github.com/s-a/sublime-text-refactor/blob/master/js/test/
 
 
 Todo for Javascript files
