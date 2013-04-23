@@ -23,7 +23,7 @@ Clone or download the git repository into your packages folder (in ST2, find Bro
 
 Dependencies
 ============
-- This Plugin makes makes heavy usage of Node.js. So it need a local installation of http://nodejs.org 
+- This Plugin makes heavy usage of Node.js. So it need a local installation of http://nodejs.org 
 - mocha (only for testing)
 
 Usage
@@ -48,12 +48,13 @@ You can find an examples of current test cases here...
 https://github.com/s-a/sublime-text-refactor/blob/master/js/test/
 
 
-Todo for Javascript files
+Todo
 ========================
+- ***Extract method***  
 - Define exceptions of global scoped variable names like jQuery or $.
+- Do not pass variables available in current Scope (optional).
 - Let the user choose a function name before or after extraction.
 - Let the user choose a custom position to insert extracted methode code and indent it correctly.
-- Rename local scoped variable.
 
 
 License
