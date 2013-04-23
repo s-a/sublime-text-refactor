@@ -9,6 +9,10 @@
 	    	"command": "gotodefinition" 
     	},
 	    {  
+	    	"caption": "Rename",
+	    	"command": "renamevariable" 
+    	},
+	    {  
 	    	"caption": "Extract Method",
 	    	"command": "extractmethod" 
     	},

@@ -121,3 +121,24 @@ class GotodefinitionCommand(RefactorBaseClass):
             r = sublime.Region(codePosition["begin"], codePosition["end"])
             self.view.sel().clear()
             self.view.sel().add(r)
+
+
+class RenamevariableCommand(RefactorBaseClass):
+    def run(self, edit):
+        self.save()
+        self.RenamevariableCommand(edit)
+
+    def RenamevariableCommand(self, edit):
+        if self.abortMultiselection():
+            return
+
+        pos = self.view.sel()[0].begin()
+        scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-rename-variable.js"
+        cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
+        self.executeNodeJsShell(cmd)
+        self.view.sel().clear()
+        jsonResultTempFile = REFACTOR_PLUGIN_FOLDER + "resultCodePositions.json"
+        selections = self.openJSONFile(jsonResultTempFile)
+        self.applyMultipleSelections(selections)
+
+        os.remove(jsonResultTempFile)

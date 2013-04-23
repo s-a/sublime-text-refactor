@@ -152,10 +152,43 @@ function findDeclaration (code, codePosition, debug) {
 		if (!debug) result = JSON.stringify(result);
 		return result;
 	}
-	
+}
+
+function renameVariable (code, codePosition, debug) {
+	var toplevel = UglifyJS.parse(code);
+	toplevel.figure_out_scope();
+	var result = null;
+	var walker = new UglifyJS.TreeWalker(function(node){
+		var varName = node.start.value;
+		result = [];
+		
+		if (node.start.pos <= codePosition && node.start.endpos >= codePosition && node.scope){	
+			if (node.thedef && node.thedef.references && node.thedef.references[0]){
+				//var NODE = util.inspect(node.thedef.references[0].start, showHidden=false, depth=2, colorize=false);
+				var references = node.thedef.references;
+				for (var i = 0; i < references.length; i++) {
+					var ref = references[i].start;
+					result.push( [ref.pos+1, ref.endpos+1] );
+				}
+				var n = "$"+varName; 
+				var org = findInScopes(n, node.scope, "variables");
+				if (org === null) org = findInScopes(n, node.scope, "functions");
+				//if (node.scope.variables._values[n]) org = .variables._values[n].orig[0];
+				//if (org===null && debug) console.log(node.scope.parent_scope);
+
+				var originalPosition = org.start;
+				result.push( [originalPosition.pos+1, originalPosition.endpos+1] );
+				if (debug){
+				}
+				fs.writeFileSync(path.join(__dirname, "../resultCodePositions.json"), JSON.stringify(result));
+			}
+		}
+	});	
+	toplevel.walk(walker); 
 }
 
 if (typeof exports !== "undefined"){
 	exports.extractMethod = extractMethod; 
 	exports.findDeclaration = findDeclaration;
+	exports.renameVariable = renameVariable;
 }
