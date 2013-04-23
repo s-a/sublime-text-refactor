@@ -4,36 +4,37 @@ Javascript Refactor Sublime2 plugin
 Overview
 ========
 
-- Extract method
-- Goto definition
+- Extract selected source to a new method.
+- Goto definition of a variable or function.
+- Rename variable or function respecting its current scope.
 
 
 Installation
 ============
 
-Use the Sublime Package Control and search for: "JavaScript Refactor" 
-
-or
-
+Use the Sublime Package Control and search for: "JavaScript Refactor"  
+or  
 Clone or download the git repository into your packages folder (in ST2, find Browse Packages... menu item to open this folder)
 
 Dependencies
 ============
-- http://nodejs.org
+- This Plugin makes makes heavy usage of Node.js. So it need a local installation of http://nodejs.org 
 - mocha (only for testing)
 
 Usage
 =====
 
-Extract Method:
+***Extract Method:***  
 Select the source code you want to extract into a new method and choose "Refactor / Extract methode" from context menu. 
 This will extract the source code instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
 It als generates a sample function call at the bottom of the new methode.
 The plugin marks all variables occurring in the source code so you can rename them on the fly. 
 
-Goto Definition:
-Select a keyword or point the cursor to the keyword and choose "Goto Definition" from context menu.
+***Goto Definition:***  
+Select a keyword via double click or point the cursor to the keyword and choose "Goto Definition" from context menu.
 
+***Rename:***  
+Select a keyword via double click or point the cursor to the keyword and choose "Rename" from context menu. The plugin will select all variables or function calls occurring in the source code including its declaration. After that you rename them all on the fly. The logic respects the variables or functions scope. So it should be save to rename them all without thinking ;) .
 
 Run the tests
 =============
