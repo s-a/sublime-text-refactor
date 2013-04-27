@@ -1,4 +1,3 @@
-import commands
 import subprocess
 import sublime
 import sublime_plugin
@@ -21,17 +20,13 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
         out = ""
         err = ""
         result = ""
-        if sublime.platform() == 'windows':
-            p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
-            (out, err) = p.communicate()
+        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
+        (out, err) = p.communicate()
 
-            if err != '':
-                sublime.error_message(err)
-            else:
-                result = out
+        if err != '':
+            sublime.error_message(err)
         else:
-            # fixme: fetch error messages
-            result = commands.getoutput('"'+'" "'.join(cmd)+'"')
+            result = out
         return result
 
     def applyMultipleSelections(self, selections):
