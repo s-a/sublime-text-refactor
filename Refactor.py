@@ -58,7 +58,7 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
             startPos = region.a
             if region.b < startPos:
                 startPos = region.b
-            self.view.replace(edit, region, text.decode('utf-8'))
+            self.view.replace(edit, region, text)
             self.currentCursorPosition = startPos
         return startPos
 
