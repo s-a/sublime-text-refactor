@@ -1,4 +1,4 @@
-Javascript Refactor Sublime2 plugin
+Javascript Refactor plugin for Sublime Text 2 and 3 
 ===============================
 
 Overview
