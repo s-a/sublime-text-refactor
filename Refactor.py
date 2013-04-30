@@ -23,11 +23,11 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
         (out, err) = p.communicate()
 
-        if err != '':
-            sublime.error_message(err)
+        if err.decode('utf-8') != '':
+            sublime.error_message(str(err))
         else:
             result = out
-        return result
+        return result.decode('utf-8')
 
     def applyMultipleSelections(self, selections):
         for region in selections:
@@ -110,6 +110,7 @@ class GotodefinitionCommand(RefactorBaseClass):
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-goto-definition.js"
         cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
         codePositionString = self.executeNodeJsShell(cmd)
+         
         codePosition = json.loads(codePositionString, encoding="utf-8")
         if codePosition != -1:
             self.view.run_command("goto_line", {"line": codePosition["line"]})
