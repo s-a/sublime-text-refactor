@@ -1,6 +1,6 @@
 Javascript Refactor plugin for Sublime Text 2 and 3 
 ===============================
-"!https://travis-ci.org/[s-a]/[sublime-text-refactor].png!":https://travis-ci.org/[s-a]/[sublime-text-refactor]
+{<img src="https://travis-ci.org/s-a/sublime-text-refactor.png" />}[https://travis-ci.org/s-a/sublime-text-refactor]  
 
 Overview
 ========
@@ -57,6 +57,7 @@ Run the tests
 =============
 Goto Pluginfolder and type 
     npm test
+
 You can find an examples of current test cases here...  
 https://github.com/s-a/sublime-text-refactor/blob/master/js/test/
 
