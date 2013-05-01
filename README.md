@@ -55,7 +55,8 @@ Select a keyword via double click or point the cursor to the keyword and choose 
 
 Run the tests
 =============
-Goto Pluginfolder into the subfolder js and simply type "mocha". To Add more tests you can save a Javascript File into the subfolder ./js/test.  
+Goto Pluginfolder and type 
+    npm test
 You can find an examples of current test cases here...  
 https://github.com/s-a/sublime-text-refactor/blob/master/js/test/
 
