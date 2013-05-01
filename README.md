@@ -12,7 +12,7 @@ Overview
 
 Preview
 ========
-http://www.youtube.com/watch?v=P9K7mxWItPw
+http://www.youtube.com/watch?v=P9K7mxWItPw  
 <img src="http://saquery.com/blg/wp-content/uploads/sublime-text-javascript-refactor.png" width="400" />
 
 Installation
