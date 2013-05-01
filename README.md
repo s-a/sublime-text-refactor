@@ -24,13 +24,13 @@ Clone or download the git repository into your packages folder.
 In Sublime Text use "Preferences/Browse Packages" menu item to open this folder. 
 The shorter way of doing this is: 
 #### Linux
-`git clone https://github.com/s-a/sublime-text-refactor ~/.config/sublime-text-2/Packages/sublime-text-refactor`
+`git clone https://github.com/s-a/sublime-text-refactor.git ~/.config/sublime-text-2/Packages/sublime-text-refactor`
 
 #### Mac
-`git clone https://github.com/s-a/sublime-text-refactor ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/sublime-text-refactor`
+`git clone https://github.com/s-a/sublime-text-refactor.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/sublime-text-refactor`
 
 #### Windows
-`git clone https://github.com/s-a/sublime-text-refactor %APPDATA%/Sublime\ Text\ 2/Packages/sublime-text-refactor`
+`git clone https://github.com/s-a/sublime-text-refactor.git %APPDATA%/Sublime\ Text\ 2/Packages/sublime-text-refactor`
 
 
 Dependencies
