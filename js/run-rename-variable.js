@@ -46,7 +46,8 @@
     var codePosition = argv[3];
     if (source.match(".js" + "$") == ".js") { 
       var sourceCode = fs.readFileSync(source, "utf8");
-      var result = renameVariable(sourceCode, parseInt(codePosition,10) , false);
+      var tempFile = argv[4];
+      var result = renameVariable(sourceCode, parseInt(codePosition,10) , false, tempFile);
       log(result);
     }
  

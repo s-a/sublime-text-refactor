@@ -45,10 +45,10 @@
 
   // continue only if the source file is specified
   if (source !== "") {
-
+    var tempFile = argv[3];
     // extra arguments with custom options could be passed, so check them now
     // and add them to the options object
-    for (i = 3, len = argv.length; i < len; i++) {
+    for (i = 4, len = argv.length; i < len; i++) {
       hash = argv[i].split(": ");
       key = hash[0];
       value = hash[1];
@@ -65,7 +65,7 @@
 
       // refactor the code
       if (source.match(".js" + "$") == ".js") { 
-        log(extractMethod(data, option));
+        log(extractMethod(data, tempFile, option));
       }
     });
   }

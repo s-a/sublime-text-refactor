@@ -1,5 +1,6 @@
 {
   "name": "sublime-text-refactor",
+  "version": "0.0.1",
   "description": "Javascript Refactor plugin for Sublime Text 2 and 3",
   "author": "Stephan Ahlf <stephan@ahlf-it.de>",
   "dependencies": {

@@ -27,7 +27,7 @@ var isJavascriptKeyword;
 	};
 })();
 
-function extractMethod(code, options, debug){
+function extractMethod(code, tempFile, options, debug){
 	normalizedCode = beautify(code); 
 	var orignialCode = code; 
 	var parms = [] ; 
@@ -83,6 +83,7 @@ function extractMethod(code, options, debug){
 		console.log(beautify(cal));
 	}
 
+	/*
 	var resultCode = UglifyJS.parse( beautify(fun) );
 	resultCode.figure_out_scope();
 	var variablePositions = [];
@@ -94,7 +95,8 @@ function extractMethod(code, options, debug){
 		}
 	});	
 	resultCode.walk(walker2); 
-	fs.writeFileSync(path.join(__dirname, "../resultCodePositions.json"), JSON.stringify(variablePositions));
+	fs.writeFileSync(tempFile, JSON.stringify(variablePositions));
+	*/
 	return result; 
 }
 
@@ -154,7 +156,7 @@ function findDeclaration (code, codePosition, debug) {
 	}
 }
 
-function renameVariable (code, codePosition, debug) {
+function renameVariable (code, codePosition, debug, tempFile) {
 	var toplevel = UglifyJS.parse(code);
 	toplevel.figure_out_scope();
 	var result = null;
@@ -180,7 +182,7 @@ function renameVariable (code, codePosition, debug) {
 				result.push( [originalPosition.pos+1, originalPosition.endpos+1] );
 				if (debug){
 				}
-				fs.writeFileSync(path.join(__dirname, "../resultCodePositions.json"), JSON.stringify(result));
+				fs.writeFileSync(tempFile, JSON.stringify(result));
 			}
 		}
 	});	

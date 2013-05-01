@@ -4,7 +4,10 @@ import sublime_plugin
 import os
 import os.path
 import json
+import platform
 from os.path import dirname, realpath
+import tempfile
+
 
 
 REFACTOR_PLUGIN_FOLDER = dirname(realpath(__file__)) + "/"
@@ -20,9 +23,14 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
         out = ""
         err = ""
         result = ""
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
-        (out, err) = p.communicate()
+        if (platform.system() is "Windows"):
+            newCmd = cmd
+        else:
+            newCmd = " ".join(str(x) for x in cmd)
 
+        print(str(newCmd))
+        p = subprocess.Popen(newCmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
+        (out, err) = p.communicate()
         if err.decode('utf-8') != '':
             sublime.error_message(str(err))
         else:
@@ -72,8 +80,8 @@ class ExtractmethodCommand(RefactorBaseClass):
             return
 
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run.js"
-        tempFile = REFACTOR_PLUGIN_FOLDER + "tmp.txt.js"
-        jsonResultTempFile = REFACTOR_PLUGIN_FOLDER + "resultCodePositions.json"
+        tempFile = tempfile.gettempdir() + "/tmp.txt.js"
+        jsonResultTempFile = tempfile.gettempdir() + "/resultCodePositions.json"
         settings = ' '.join([
             "indent_size:\ 2",
             "indent_char:\ ' '",
@@ -81,19 +89,18 @@ class ExtractmethodCommand(RefactorBaseClass):
             "brace_style:\ collapse"
         ])
 
-        cmd = ["node", scriptPath, tempFile, settings]
+        cmd = ["node", scriptPath, tempFile, jsonResultTempFile, settings]
         code = self.view.substr(self.view.sel()[0])
         self.writeTextFile(code, tempFile)
         refactoredText = self.executeNodeJsShell(cmd)
 
         if len(refactoredText):
             self.replaceCurrentTextSelection(edit, refactoredText)
-
+            print(self.currentCursorPosition)
+            selections = [[12, 13]] #self.openJSONFile(jsonResultTempFile)
             self.view.sel().clear()
-            selections = self.openJSONFile(jsonResultTempFile)
             self.applyMultipleSelections(selections)
-
-            os.remove(jsonResultTempFile)
+            self.view.run_command("renamevariable",{})
         os.remove(tempFile)
 
 
@@ -130,10 +137,10 @@ class RenamevariableCommand(RefactorBaseClass):
 
         pos = self.view.sel()[0].begin()
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-rename-variable.js"
-        cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
+        jsonResultTempFile = tempfile.gettempdir() + "/resultCodePositions.json"
+        cmd = ["node", scriptPath, self.view.file_name(), str(pos), jsonResultTempFile]
         self.executeNodeJsShell(cmd)
         self.view.sel().clear()
-        jsonResultTempFile = REFACTOR_PLUGIN_FOLDER + "resultCodePositions.json"
         selections = self.openJSONFile(jsonResultTempFile)
         self.applyMultipleSelections(selections)
 
