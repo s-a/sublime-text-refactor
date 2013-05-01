@@ -1,5 +1,6 @@
 Javascript Refactor plugin for Sublime Text 2 and 3 
 ===============================
+"!https://travis-ci.org/[s-a]/[sublime-text-refactor].png!":https://travis-ci.org/[s-a]/[sublime-text-refactor]
 
 Overview
 ========

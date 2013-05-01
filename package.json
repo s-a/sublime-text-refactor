@@ -1,0 +1,16 @@
+{
+  "name": "sublime-text-refactor",
+  "description": "Javascript Refactor plugin for Sublime Text 2 and 3",
+  "author": "Stephan Ahlf <stephan@ahlf-it.de>",
+  "dependencies": {
+    "js-beautify": "0.4.2",
+    "uglify-js": "2.2.5" 
+  },
+  "devDependencies": {
+    "mocha": "1.9.0"
+  },
+  "engine": "node >= 0.4.1",
+  "scripts": {
+    "test": "cd js && mocha"
+  }
+}
