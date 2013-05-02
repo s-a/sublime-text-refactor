@@ -28,7 +28,6 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
         else:
             newCmd = " ".join(str(x) for x in cmd)
 
-        print(str(newCmd))
         p = subprocess.Popen(newCmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
         (out, err) = p.communicate()
         if err.decode('utf-8') != '':
@@ -96,11 +95,10 @@ class ExtractmethodCommand(RefactorBaseClass):
 
         if len(refactoredText):
             self.replaceCurrentTextSelection(edit, refactoredText)
-            print(self.currentCursorPosition)
-            selections = [[12, 13]] #self.openJSONFile(jsonResultTempFile)
+            selections = [[12, 13]]  # self.openJSONFile(jsonResultTempFile)
             self.view.sel().clear()
             self.applyMultipleSelections(selections)
-            self.view.run_command("renamevariable",{})
+            self.view.run_command("renamevariable", {})
         os.remove(tempFile)
 
 
@@ -117,7 +115,6 @@ class GotodefinitionCommand(RefactorBaseClass):
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-goto-definition.js"
         cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
         codePositionString = self.executeNodeJsShell(cmd)
-         
         codePosition = json.loads(codePositionString, encoding="utf-8")
         if codePosition != -1:
             self.view.run_command("goto_line", {"line": codePosition["line"]})

@@ -24,9 +24,7 @@
  /*global console, process, require, __dirname */
 
  (function() {
-  "use strict";
-var fs = require("fs");   
-  fs.writeFileSync("/tmp/done.json", JSON.stringify({"done":true}));
+  "use strict"; 
 
 
   var i, len, hash, key, value, raw,
