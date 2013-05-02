@@ -26,7 +26,7 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
         if (platform.system() is "Windows"):
             newCmd = cmd
         else:
-            newCmd = " ".join(str(x) for x in cmd)
+            newCmd = " ".join("'" + str(x) + "'" for x in cmd)
 
         p = subprocess.Popen(newCmd, shell=True, stdout=subprocess.PIPE,  stderr=subprocess.PIPE)
         (out, err) = p.communicate()
