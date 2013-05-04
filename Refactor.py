@@ -112,7 +112,9 @@ class ExtractmethodCommand(RefactorBaseClass):
         refactoredText = self.executeNodeJsShell(cmd)
 
         if len(refactoredText):
-            self.replaceCurrentTextSelection(edit, refactoredText)
+            pos = self.view.sel()[0].begin()
+            indend = self.get_indent(pos)
+            self.replaceCurrentTextSelection(edit, refactoredText.replace("\n", "\n" + indend))
             selections = [[12, 13]]  # self.openJSONFile(jsonResultTempFile)
             self.view.sel().clear()
             self.applyMultipleSelections(selections)
@@ -176,7 +178,6 @@ class IntroducevariableCommand(RefactorBaseClass):
         code = self.view.substr(self.view.sel()[0])
         newVariableName = "__newVar__" + str(datetime.now()).replace(" ", "").replace(":", "").replace("-", "").replace(".", "")
         self.replaceCurrentTextSelection(edit, newVariableName)
-        print("indend:", indend)
         newPos = len(indend) + line.begin()
         self.view.insert(edit, line.begin(), indend + "var " + newVariableName + " = " + code + ";\n")
         r = sublime.Region(newPos + 4, newPos + len(newVariableName) + 4)
