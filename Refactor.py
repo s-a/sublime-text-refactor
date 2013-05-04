@@ -141,6 +141,8 @@ class GotodefinitionCommand(RefactorBaseClass):
             r = sublime.Region(codePosition["begin"], codePosition["end"])
             self.view.sel().clear()
             self.view.sel().add(r)
+        else:
+            sublime.status_message("Could not find declaration of " + self.view.substr(self.view.word(pos)))
 
 
 class RenamevariableCommand(RefactorBaseClass):
@@ -158,10 +160,12 @@ class RenamevariableCommand(RefactorBaseClass):
         cmd = ["node", scriptPath, self.view.file_name(), str(pos), jsonResultTempFile]
         self.executeNodeJsShell(cmd)
         self.view.sel().clear()
-        selections = self.openJSONFile(jsonResultTempFile)
-        self.applyMultipleSelections(selections)
-
-        os.remove(jsonResultTempFile)
+        if (os.path.exists(jsonResultTempFile)):
+            selections = self.openJSONFile(jsonResultTempFile)
+            self.applyMultipleSelections(selections)
+            os.remove(jsonResultTempFile)
+        else:
+            sublime.status_message("Could not find declaration of " + self.view.substr(self.view.word(pos)))
 
 
 class IntroducevariableCommand(RefactorBaseClass):
