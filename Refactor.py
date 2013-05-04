@@ -7,7 +7,7 @@ import json
 import platform
 from os.path import dirname, realpath
 import tempfile
-
+from datetime import datetime
 
 
 REFACTOR_PLUGIN_FOLDER = dirname(realpath(__file__)) + "/"
@@ -68,6 +68,24 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
             self.view.replace(edit, region, text)
             self.currentCursorPosition = startPos
         return startPos
+
+    def normalize_line_endings(self, string):
+        string = string.replace('\r\n', '\n').replace('\r', '\n')
+        line_endings = self.view.settings().get('default_line_ending')
+        if line_endings == 'windows':
+            string = string.replace('\n', '\r\n')
+        elif line_endings == 'mac':
+            string = string.replace('\n', '\r')
+        return string
+
+    def get_indent(self, pos):
+        (row, col) = self.view.rowcol(pos)
+        indent_region = self.view.find('^\s+', self.view.text_point(row, 0))
+        if self.view.rowcol(indent_region.begin())[0] == row:
+            indent = self.view.substr(indent_region)
+        else:
+            indent = ''
+        return indent
 
 
 class ExtractmethodCommand(RefactorBaseClass):
@@ -142,3 +160,26 @@ class RenamevariableCommand(RefactorBaseClass):
         self.applyMultipleSelections(selections)
 
         os.remove(jsonResultTempFile)
+
+
+class IntroducevariableCommand(RefactorBaseClass):
+    def run(self, edit):
+        self.Introducevariable(edit)
+
+    def Introducevariable(self, edit):
+        if self.abortMultiselection():
+            return
+
+        pos = self.view.sel()[0].begin()
+        line = self.view.line(pos)
+        indend = self.get_indent(pos)
+        code = self.view.substr(self.view.sel()[0])
+        newVariableName = "__newVar__" + str(datetime.now()).replace(" ", "").replace(":", "").replace("-", "").replace(".", "")
+        self.replaceCurrentTextSelection(edit, newVariableName)
+        print("indend:", indend)
+        newPos = len(indend) + line.begin()
+        self.view.insert(edit, line.begin(), indend + "var " + newVariableName + " = " + code + ";\n")
+        r = sublime.Region(newPos + 4, newPos + len(newVariableName) + 4)
+        self.view.sel().clear()
+        self.view.sel().add(r)
+        self.view.run_command("renamevariable", {})

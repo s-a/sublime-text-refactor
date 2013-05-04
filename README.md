@@ -5,15 +5,15 @@ Javascript Refactor plugin for Sublime Text 2 and 3
 Overview
 ========
 
-- Extract selected source to a new method.
-- Goto definition of a variable or function.
-- Rename variable or function respecting its current scope.
+- Goto definition of a variable or function
+- Rename variable or function respecting its current scope
+- Introduce variable
+- Extract selected source to a new method
 
 
 Preview
 ========
 http://www.youtube.com/watch?v=P9K7mxWItPw  
-<img src="http://saquery.com/blg/wp-content/uploads/sublime-text-javascript-refactor.png" width="400" />
 
 Installation
 ============
@@ -41,24 +41,28 @@ Dependencies
 Usage
 =====
 
-***Extract Method:***  
-Select the source code you want to extract into a new method and choose "Refactor / Extract methode" from context menu. 
-This will extract the source code instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
-It als generates a sample function call at the bottom of the new methode.
-The plugin marks all variables occurring in the source code so you can rename them on the fly. 
-
 ***Goto Definition:***  
 Select a keyword via double click or point the cursor to the keyword and choose "Goto Definition" from context menu.
 
 ***Rename:***  
 Select a keyword via double click or point the cursor to the keyword and choose "Rename" from context menu. The plugin will select all variables or function calls occurring in the source code including its declaration. After that you rename them all on the fly. The logic respects the variables or functions scope. So it should be save to rename them all without thinking ;) .
 
+***Introduce Variable:***  
+Select an Expression from source code or point the cursor to the desired position and choose "Introduce Variable" from context menu. 
+
+***Extract Method:***  
+Select the source code you want to extract into a new method and choose "Refactor / Extract methode" from context menu. 
+This will extract the source code instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
+It als generates a sample function call at the bottom of the new methode.
+The plugin marks all variables occurring in the source code so you can rename them on the fly. 
+
+
 Run the tests
 =============
 Goto Pluginfolder and type 
     npm test
 
-You can find an examples of current test cases here...  
+You can find current test cases here  
 https://github.com/s-a/sublime-text-refactor/blob/master/js/test/
 
 

@@ -12,6 +12,10 @@
 	    	"caption": "Rename",
 	    	"command": "renamevariable" 
     	},
+    	{  
+	    	"caption": "Introduce Variable",
+	    	"command": "introducevariable" 
+    	},
 	    {  
 	    	"caption": "Extract Method",
 	    	"command": "extractmethod" 
