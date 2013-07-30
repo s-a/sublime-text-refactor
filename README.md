@@ -66,6 +66,17 @@ You can find current test cases here
 https://github.com/s-a/sublime-text-refactor/blob/master/js/test/
 
 
+Troubleshoot
+============
+ * Node not found
+  * Choose `Preferences: Refactor Settings – User` from context menu and configure the `nodePath` setup. (Default Value is `Node`)  
+
+
+```{
+	"nodePath" : "node"
+}```
+
+
 Todo
 ========================
 - ***Extract method***  

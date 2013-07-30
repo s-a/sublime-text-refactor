@@ -25,7 +25,21 @@
 	    { "caption": "Selection: Expand to Scope", "command": "expand_selection", "args": {"to": "scope"} },
 	    { "caption": "Selection: Expand to Brackets", "command": "expand_selection", "args": {"to": "brackets"} },
 	    { "caption": "Selection: Expand to Indentation", "command": "expand_selection", "args": {"to": "indentation"} },
-	    { "caption": "Selection: Expand to Tag", "command": "expand_selection", "args":     {"to": "tag"} }
+	    { "caption": "Selection: Expand to Tag", "command": "expand_selection", "args":     {"to": "tag"} },
+	    {
+	        "caption": "Preferences: Refaktor Settings – Default",
+	        "command": "open_file", "args":
+	        {
+	            "file": "${packages}/sublime-text-refactor/Refactor.sublime-settings"
+	        }
+	    },
+	    {
+	        "caption": "Preferences: Refactor Settings – User",
+	        "command": "open_file", "args":
+	        {
+	            "file": "${packages}/User/Refactor.sublime-settings"
+	        }
+	    }	    
 	]
 }
 ]

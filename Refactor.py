@@ -12,9 +12,26 @@ from datetime import datetime
 
 REFACTOR_PLUGIN_FOLDER = dirname(realpath(__file__)) + "/"
 
+ALL_SETTINGS = [
+    'nodePath'
+]
+
+NODE_PATH = "node"
 
 class RefactorBaseClass(sublime_plugin.TextCommand):
     currentCursorPosition = -1
+
+    def init(self, edit, active_group=False):
+        '''Restores user settings.'''
+        settings = sublime.load_settings('Refactor.sublime-settings')
+        
+        for setting in ALL_SETTINGS:
+            if settings.get(setting) != None:
+                self.view.settings().set(setting, settings.get(setting))
+
+        NODE_PATH = self.view.settings().get('nodePath', 'node') 
+        print((__name__ + '.sublime-settings'))
+        print(NODE_PATH)
 
     def save(self):
         self.view.run_command("save")
@@ -90,6 +107,7 @@ class RefactorBaseClass(sublime_plugin.TextCommand):
 
 class ExtractmethodCommand(RefactorBaseClass):
     def run(self, edit):
+        self.init(edit)
         self.ExtractmethodCommand(edit)
 
     def ExtractmethodCommand(self, edit):
@@ -106,7 +124,7 @@ class ExtractmethodCommand(RefactorBaseClass):
             "brace_style:\ collapse"
         ])
 
-        cmd = ["node", scriptPath, tempFile, jsonResultTempFile, settings]
+        cmd = [self.view.settings().get('nodePath', 'node'), scriptPath, tempFile, jsonResultTempFile, settings]
         code = self.view.substr(self.view.sel()[0])
         self.writeTextFile(code, tempFile)
         refactoredText = self.executeNodeJsShell(cmd)
@@ -124,6 +142,7 @@ class ExtractmethodCommand(RefactorBaseClass):
 
 class GotodefinitionCommand(RefactorBaseClass):
     def run(self, edit):
+        self.init(edit)
         self.save()
         self.GotodefinitionCommand(edit)
 
@@ -133,7 +152,7 @@ class GotodefinitionCommand(RefactorBaseClass):
 
         pos = self.view.sel()[0].begin()
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-goto-definition.js"
-        cmd = ["node", scriptPath, self.view.file_name(), str(pos)]
+        cmd = [self.view.settings().get('nodePath', 'node'), scriptPath, self.view.file_name(), str(pos)]
         codePositionString = self.executeNodeJsShell(cmd)
         codePosition = json.loads(codePositionString, encoding="utf-8")
         if codePosition != -1:
@@ -147,6 +166,7 @@ class GotodefinitionCommand(RefactorBaseClass):
 
 class RenamevariableCommand(RefactorBaseClass):
     def run(self, edit):
+        self.init(edit)
         self.save()
         self.RenamevariableCommand(edit)
 
@@ -157,7 +177,7 @@ class RenamevariableCommand(RefactorBaseClass):
         pos = self.view.sel()[0].begin()
         scriptPath = REFACTOR_PLUGIN_FOLDER + "js/run-rename-variable.js"
         jsonResultTempFile = tempfile.gettempdir() + "/resultCodePositions.json"
-        cmd = ["node", scriptPath, self.view.file_name(), str(pos), jsonResultTempFile]
+        cmd = [self.view.settings().get('nodePath', 'node'), scriptPath, self.view.file_name(), str(pos), jsonResultTempFile]
         self.executeNodeJsShell(cmd)
         self.view.sel().clear()
         if (os.path.exists(jsonResultTempFile)):
@@ -170,6 +190,7 @@ class RenamevariableCommand(RefactorBaseClass):
 
 class IntroducevariableCommand(RefactorBaseClass):
     def run(self, edit):
+        self.init(edit)
         self.Introducevariable(edit)
 
     def Introducevariable(self, edit):
