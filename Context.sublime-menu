@@ -27,7 +27,7 @@
 	    { "caption": "Selection: Expand to Indentation", "command": "expand_selection", "args": {"to": "indentation"} },
 	    { "caption": "Selection: Expand to Tag", "command": "expand_selection", "args":     {"to": "tag"} },
 	    {
-	        "caption": "Preferences: Refaktor Settings – Default",
+	        "caption": "Preferences: Refactor Settings – Default",
 	        "command": "open_file", "args":
 	        {
 	            "file": "${packages}/sublime-text-refactor/Refactor.sublime-settings"
