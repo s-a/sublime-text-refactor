@@ -1,8 +1,8 @@
 Javascript Refactor plugin for Sublime Text 2 and 3 
 ===============================
 <img src="https://travis-ci.org/s-a/sublime-text-refactor.png" /> 
-[![Package Control](https://packagecontrol.herokuapp.com/downloads/sublime-text-refactor.svg?color=50C32E)](https://packagecontrol.io/packages/sublime-text-refactor)
-
+[![Package Control](https://packagecontrol.herokuapp.com/downloads/JavaScript%20Refactor.svg?color=50C32E)](https://packagecontrol.io/packages/JavaScript%20Refactor)
+ 
 Overview
 ========
 
