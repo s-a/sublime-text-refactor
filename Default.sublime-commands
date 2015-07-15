@@ -1,0 +1,50 @@
+[
+    {
+        "caption": "Text Refactor: Goto definition",
+        "command": "gotodefinition"
+    },
+    {
+        "caption": "Text Refactor: Rename",
+        "command": "renamevariable"
+    },
+    {
+        "caption": "Text Refactor: Introduce Variable",
+        "command": "introducevariable"
+    },
+    {
+        "caption": "Text Refactor: Extract Method",
+        "command": "extractmethod"
+    },
+    {
+        "caption": "Text Refactor: Expand to Paragraph",
+        "command": "expand_selection_to_paragraph"
+    },
+    {
+        "caption": "Text Refactor: Expand to Scope",
+        "command": "expand_selection",
+        "args": {
+            "to": "scope"
+        }
+    },
+    {
+        "caption": "Text Refactor: Expand to Brackets",
+        "command": "expand_selection",
+        "args": {
+            "to": "brackets"
+        }
+    },
+    {
+        "caption": "Text Refactor: Expand to Indentation",
+        "command": "expand_selection",
+        "args": {
+            "to": "indentation"
+        }
+    },
+    {
+        "caption": "Text Refactor: Expand to Tag",
+        "command": "expand_selection",
+        "args": {
+            "to": "tag"
+        }
+    }
+]
