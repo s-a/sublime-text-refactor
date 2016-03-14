@@ -32,11 +32,13 @@ function extractMethod(code, tempFile, options, debug){
 	var orignialCode = code; 
 	var parms = [] ; 
 	var parmsJSON = [];
-	var toplevel = UglifyJS.parse(normalizedCode);
+	var toplevel = UglifyJS.parse(normalizedCode, { bare_returns : true });
 	toplevel.figure_out_scope();
-	var stream = UglifyJS.OutputStream({
+
+	var stream = new UglifyJS.OutputStream({
 		comments : true,
-		preserve_line : false
+		preserve_line : false,
+		
 	});
     
 	var walker = new UglifyJS.TreeWalker(function(node){
