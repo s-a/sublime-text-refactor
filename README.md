@@ -47,7 +47,7 @@ Usage
 Select a keyword via double click or point the cursor to the keyword and choose "Goto Definition" from context menu.
 
 ***Rename:***  
-Select a keyword via double click or point the cursor to the keyword and choose "Rename" from context menu. The plugin will select all variables or function calls occurring in the source code including its declaration. After that you rename them all on the fly. The logic respects the variables or functions scope. So it should be save to rename them all without thinking ;) .
+Select a keyword via double click or point the cursor to the keyword and choose "Rename" from context menu. The plugin will select all variables or function calls occurring in the source code including its declaration. After that you rename them all on the fly. The logic respects the variables or functions scope. So it should be safe to rename them all without thinking ;) .
 
 ***Introduce Variable:***  
 Select an Expression from source code or point the cursor to the desired position and choose "Introduce Variable" from context menu. 
