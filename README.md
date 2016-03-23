@@ -55,7 +55,7 @@ Select an Expression from source code or point the cursor to the desired positio
 ***Extract Method:***  
 Select the source code you want to extract into a new method and choose "Refactor / Extract methode" from context menu. 
 This will extract the source code instantly to a new methode aka function. The plugin will manage undeclared variable usages and pass them within a single bundled JSON parameter to the new function.
-It als generates a sample function call at the bottom of the new methode.
+It also generates a sample function call at the bottom of the new methode.
 The plugin marks all variables occurring in the source code so you can rename them on the fly. 
 
 
