@@ -32,7 +32,10 @@ The shorter way of doing this is:
 `git clone https://github.com/s-a/sublime-text-refactor.git ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/sublime-text-refactor`
 
 #### Windows
-`git clone https://github.com/s-a/sublime-text-refactor.git %APPDATA%\Sublime Text 2\Packages\sublime-text-refactor`
+In an elevated command prompt or powershell (as Admin):
+`git clone https://github.com/s-a/sublime-text-refactor.git "%APPDATA%\Sublime Text 2\Packages\sublime-text-refactor`"
+for Sublime Text 3:
+`git clone https://github.com/s-a/sublime-text-refactor.git "%APPDATA%\Sublime Text 3\Packages\sublime-text-refactor`"
 
 
 Dependencies
